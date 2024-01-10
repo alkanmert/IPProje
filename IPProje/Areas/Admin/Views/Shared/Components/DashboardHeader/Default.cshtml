@@ -1,0 +1,10 @@
+﻿@model UserProfileModel
+
+<li class="nav-item">
+    <a class="nav-link disabled" aria-current="page">
+        <div class="icon-wrap">
+            <img src="~/images/@Model.Image.FileName" width="40px"  height="40px" class="rounded-circle"/>
+        </div>
+        <span style="color:black" class="text-truncate">@Model.UserName (@Model.Role)</span>
+    </a>
+</li>

@@ -1,0 +1,43 @@
+﻿@* @inject IHttpContextAccessor Accessor
+
+@model UserProfileModel
+
+<form enctype="multipart/form-data">
+    <ul class="navbar-nav">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="~/images/@Model.Image.FileName" class="rounded-circle" width="40px" height="40px" />
+                    Merhaba @Model.FirstName
+                </a> 
+                <ul class="dropdown-menu">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (!User.IsInRole("Uye"))
+                        {
+                            <li class="nav-item">
+                                <a>
+                                    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="dropdown-item">Admin Portalı</a>
+                                </a>
+                            </li>
+                        }
+                    }
+                    <li><a asp-area="" asp-controller="User" asp-action="UserProfile" class="dropdown-item">Profilim</a></li>
+                    <hr class="m-0" />
+                    <li><a asp-area="" asp-controller="Home" asp-action="Logout" class="dropdown-item">Çıkış Yap</a></li>
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Oturum Aç</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Kayıt Ol</a>
+            </li>
+        }
+    </ul>
+</form>
+ *@

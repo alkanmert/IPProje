@@ -1,0 +1,94 @@
+﻿@model UserAddModel
+
+<div class="container mt-5 shadow pb-3" style="background-color:white">
+
+    <div class="d-flex d-flex justify-content-between  py-3 mb-4">
+        <h4 class="fw-bold">
+            <span class="text-muted fw-light">Kullanıcı Yönetimi /</span> Kullanıcı Ekle
+        </h4>
+        <a class="d-inline float-end text-success text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+            Rol Ekle <i class="fa-solid fa-square-plus"></i>
+        </a>
+    </div>
+    <form asp-controller="User" asp-action="Add" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="All" style="color: red"></div>
+        <div class="form-group mb-3">
+            <label class="form-label" asp-for="FirstName">İsim</label>
+            <input asp-for="FirstName" class="form-control" placeholder="İsim giriniz" aria-describedby="defaultFormControl">
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label" asp-for="LastName">Soyisim</label>
+            <input asp-for="LastName" class="form-control" placeholder="Soyisim giriniz" aria-describedby="defaultFormControl">
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label" asp-for="UserName">Kullanıcı Adı</label>
+            <input asp-for="UserName" class="form-control" placeholder="Soyisim giriniz" aria-describedby="defaultFormControl">
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label" asp-for="RoleId">Rol</label>
+            <select asp-for="RoleId" class="form-control" asp-items="@(new SelectList(Model.Roles,"Id","Name"))"></select>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label" asp-for="Email">Email</label>
+            <input asp-for="Email" type="email" class="form-control" placeholder="Email adresi giriniz" aria-describedby="defaultFormControl">
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label" asp-for="PhoneNumber">Telefon Numarası</label>
+            <input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="Telefon Numarası giriniz" aria-describedby="defaultFormControl">
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label" asp-for="Password">Parola</label>
+            <input asp-for="Password" type="password" class="form-control" placeholder="Parola belirleyiniz" aria-describedby="defaultFormControl">
+        </div>
+
+        <div class="d-flex justify-content-start">
+            <div class="form-grup">
+                <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+                <button asp-area="Admin" asp-controller="User" asp-action="Index" asp-for="" type="submit" class="btn btn-outline-danger">İptal</button>
+            </div>
+        </div>
+
+    </form>
+
+@*     Rol Ekleme Ajax *@
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Rol Ekleme</h5>
+                    <button type="button" data-bs-dismiss="modal" class="btn-close" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="d-block form-label">Rol İsmi</label>
+                            <input class="form-control" type="text" id="roleName" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Kapat</button>
+                    <button type="button" data-keyboard="false" class="btn btn-primary" id="btnKaydet">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <script src="~/js/roleAdd.js"></script>
+
+    <script>
+        var app = app || {};
+        app.Urls = app.Urls || {};
+
+        app.Urls.baseUrls = '@Url.Content("~")';
+        app.Urls.roleAddUrl = "@(Url.Action("RoleAddWithAjax", "User"))";
+        app.Urls.userIndexUrl = "@(Url.Action("Index", "User"))";
+    </script>
+
+}

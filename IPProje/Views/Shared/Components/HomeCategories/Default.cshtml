@@ -1,0 +1,20 @@
+﻿@model List<CategoryModel>
+
+
+<ul class="navbar-nav ">
+    @foreach (var categories in Model)
+    {
+        <li name="@categories.Id" class="nav-item">
+            <a class="nav-link">@categories.Name</a>
+        </li>
+    }
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Daha fazlası
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Yazarlarımız</a></li>
+            <li><a class="dropdown-item" href="#">Üyelerimiz</a></li>
+        </ul>
+    </li>
+</ul>

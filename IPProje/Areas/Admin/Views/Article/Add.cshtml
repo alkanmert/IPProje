@@ -1,0 +1,75 @@
+﻿@model ArticleAddModel
+
+<div class="container mt-5 shadow pb-3" style="background-color:white">
+
+    <div class="d-flex d-flex justify-content-between  py-3 mb-4">
+        <h4 class="fw-bold">
+            <span class="text-muted fw-light">Haber Yönetimi /</span> Haber Ekle
+        </h4>
+    </div>
+    <form asp-controller="Article" asp-action="Add" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly"></div>
+
+        <div class="form-group my-3">
+            <a class="d-inline float-end text-success text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                Ekle <i class="fa-solid fa-square-plus"></i>
+            </a>
+            <label asp-for="CategoryId">Haber Kategorisi</label>
+            <select class="form-control" id="categoryList" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Title">Başlık</label>
+            <input asp-for="Title" class="form-control" placeholder="Makale Başlığı">
+            <span asp-validation-for="Title"></span>
+        </div>
+
+        <div class="form-group pb-3">
+            <label asp-for="Content">İçerik</label>
+            <textarea style="min-height:300px" asp-for="Content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <span asp-validation-for="Content"></span>
+        </div>
+
+        <div class="form-group pb-3">
+            <label asp-for="Photo">Resim Seçiniz</label>
+            <input asp-for="Photo" accept="image/*" class="form-control" type="file" />
+            <span asp-validation-for="Photo"></span>
+        </div>
+        
+        <div class="d-flex justify-content-start">
+            <div class="form-grup">
+                <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+                <button asp-area="Admin" asp-controller="Article" asp-action="Index" asp-for="" type="submit" class="btn btn-outline-danger">İptal</button>
+            </div>
+        </div>
+
+    </form>
+
+
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Kategori Ekleme</h5>
+                <button type="button" data-bs-dismiss="modal" class="btn-close" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="d-block form-label">Kategori İsmi</label>
+                        <input class="form-control" type="text" id="categoryName" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" data-keyboard="false" class="btn btn-primary" id="btnKaydet">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+﻿@model List<AppRole>
+
+<div class="container mt-5 shadow" style="background-color:white">
+
+    <div class="d-flex d-flex justify-content-between  py-3 mb-4">
+        <h4 class="fw-bold">
+            <span class="text-muted fw-light">Rol Yönetimi /</span> Roller
+        </h4>
+
+        <a class="d-inline float-end text-success text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+            Rol Ekle <i class="fa-solid fa-square-plus"></i>
+        </a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Rol Id(Guid)</th>
+                <th>Rol Adı</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model)
+            {
+                <tr name="@role.Id">
+                    <td>@role.Id</td>
+                    <td>@role.Name</td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" data-id="@role.Id" asp-area="Admin" asp-controller="Role" asp-action="Delete" asp-route-roleId="@role.Id">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Rol Id(Guid)</th>
+                <th>Rol Adı</th>
+                <th>İşlemler</th>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+
+@*     Rol Ekleme Ajax *@
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Rol Ekleme</h5>
+                <button type="button" data-bs-dismiss="modal" class="btn-close" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="d-block form-label">Rol İsmi</label>
+                        <input class="form-control" type="text" id="roleName" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" data-keyboard="false" class="btn btn-primary" id="btnKaydet">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+@section Scripts {
+
+    <script src="~/js/roleAdd.js"></script>
+
+    <script>
+        var app = app || {};
+        app.Urls = app.Urls || {};
+
+        app.Urls.baseUrls = '@Url.Content("~")';
+        app.Urls.roleAddUrl = "@(Url.Action("RoleAddWithAjax", "Role"))";
+        app.Urls.userIndexUrl = "@(Url.Action("Index", "Role"))";
+    </script>
+}

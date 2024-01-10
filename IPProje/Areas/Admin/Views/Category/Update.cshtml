@@ -1,0 +1,29 @@
+﻿
+@model CategoryUpdateModel
+
+
+<div class="container mt-5 shadow pb-3" style="background-color:white">
+
+    <div class="d-flex d-flex justify-content-between  py-3 mb-4">
+        <h4 class="fw-bold">
+            <span class="text-muted fw-light">Kategori Yönetimi /</span> Kategori Ekle
+        </h4>
+    </div>
+    <form asp-controller="Category" asp-action="Update" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Name">Kategori ismi</label>
+            <input asp-for="Name" class="form-control" placeholder="Kategori ismini giriniz">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="d-flex justify-content-start mt-3">
+            <div class="form-grup">
+                <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+                <button asp-area="Admin" asp-controller="Category" asp-action="Index" asp-for="" type="submit" class="btn btn-outline-danger">İptal</button>
+            </div>
+        </div>
+    </form>
+
+
+</div>
